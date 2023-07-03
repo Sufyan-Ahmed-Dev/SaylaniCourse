@@ -4,32 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Even Odd Finder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>EVEN ODD FINDER</h1>
-        <input type="number" id="num1"/>
-        <div>
-        <button type="button" onclick="CheckNumber()">Check</button>
-        <p id="result"></p>
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl text-center mb-4">EVEN ODD FINDER</h1>
+        <div class="flex items-center justify-center">
+            <input type="number" id="num1" class="px-4 py-2 border border-gray-300 rounded-md mr-2">
+            <button type="button" onclick="CheckNumber()" class="px-4 py-2 bg-green-500 text-white rounded-md">Check</button>
         </div>
+        <p id="result" class="text-center mt-4"></p>
     </div>
-</body>
-<script>
-    function CheckNumber() {
-        let num = document.getElementById("num1").value;
-        alert(num);
-        num = num % 2;
 
-        if (num === 0) {
-            console.log("Even number");
+    <script>
+        function CheckNumber() {
+            let num = document.getElementById("num1").value;
+            let result;
+
+            num = num % 2;
+
+            if (num === 0) {
+                result = "EVEN NUMBER";
+                console.log(result);
+            } else if (num === 1) {
+                result = "ODD number";
+                console.log(result);
+            } else {
+                result = "Something went wrong";
+                console.log(result);
+            }
+
+            document.getElementById("result").textContent = result;
         }
-        else if (num === 1){
-            console.log("ODD number");
-        }else{
-            console.log("Something wrong");
-        }
-        const result = 
-    }
-</script>
+    </script>
+</body>
 </html>
