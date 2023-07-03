@@ -33,33 +33,26 @@
 
 </body>
  <script>
-     function opertaionFunc() {
+    function operationFunc() {
+      const operation = document.getElementById("operator").value;
+      const num1 = document.getElementById("num1").value;
+      const num2 = document.getElementById("num2").value;
+      let result;
 
-const opertaion = document.getElementById("operater").value;
-const num1 = document.getElementById("num1").value;
-const num2 = document.getElementById("num2").value;
+      if (operation === "+") {
+        result = parseInt(num1) + parseInt(num2);
+      } else if (operation === "-") {
+        result = parseInt(num1) - parseInt(num2);
+      } else if (operation === "/") {
+        result = parseInt(num1) / parseInt(num2);
+      } else if (operation === "*") {
+        result = parseInt(num1) * parseInt(num2);
+      } else {
+        result = "Some issue with number conversion.";
+      }
 
-if (opertaion === "+") {
-  result = parseInt(num1) + parseInt(num2);
-  console.log(result);
-}
-else if (opertaion === "-") {
-  result = parseInt(num1) - parseInt(num2);
-  console.log(result);
-}
-else if (opertaion === "/") {
-  result = parseInt(num1) / parseInt(num2);
-  console.log(result);
-}
-else if (opertaion === "*") {
-  result = parseInt(num1) * parseInt(num2);
-  console.log(result);
-}
-else {
-  result = "Some issue with number conversion "
-  console.log(result);
-}
-}
+      document.getElementById("result").value = result;
+    }
   </script>
 
 </html>
