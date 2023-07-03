@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even Odd Finder</title>
+</head>
+<body>
+    <div class="container">
+        <h1>EVEN ODD FINDER</h1>
+        <input type="number" id="num1"/>
+        <div>
+        <button type="button" onclick="CheckNumber()">Check</button>
+        <p id="result"></p>
+        </div>
+    </div>
+</body>
+<script>
+    function CheckNumber() {
+        let num = document.getElementById("num1").value;
+        alert(num);
+        num = num % 2;
+
+        if (num === 0) {
+            console.log("Even number");
+        }
+        else if (num === 1){
+            console.log("ODD number");
+        }else{
+            console.log("Something wrong");
+        }
+        const result = 
+    }
+</script>
+</html>
