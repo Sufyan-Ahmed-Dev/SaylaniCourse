@@ -1,96 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <style>
-        body {
-            background-color: #f1f1f1;
-            font-family: Arial, sans-serif;
-        }
+      body {
+        background-color: #f1f1f1;
+        font-family: Arial, sans-serif;
+      }
 
-        .container {
-            padding-top: 5rem;
-        }
+      .container {
+        padding-top: 5rem;
+      }
 
-        .card {
-            background-color: #fff;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      .card {
+        background-color: #fff;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        .card-header {
-            background-color: #f5f5f5;
-            border-bottom: none;
-            border-radius: 8px 8px 0 0;
-            padding: 1rem;
-        }
+      .card-header {
+        background-color: #f5f5f5;
+        border-bottom: none;
+        border-radius: 8px 8px 0 0;
+        padding: 1rem;
+      }
 
-        .card-body {
-            padding: 1.5rem;
-        }
+      .card-body {
+        padding: 1.5rem;
+      }
 
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
+      .input-group {
+        margin-bottom: 1.5rem;
+      }
 
-        .weather-icon {
-            font-size: 3rem;
-            color: #bbb;
-        }
+      .weather-icon {
+        font-size: 3rem;
+        color: #bbb;
+      }
 
-        .temperature {
-            /* font-size: 2.5rem; */
-            font-weight: bold;
-        }
+      .temperature {
+        /* font-size: 2.5rem; */
+        font-weight: bold;
+      }
 
-        .weather-info {
-            margin-top: 1.5rem;
-        }
+      .weather-info {
+        margin-top: 1.5rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <section class="vh-100">
-        <div class="container">
-      
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-8 col-lg-6 col-xl-4">
-      
-                    <h3 class="mb-4 pb-2 fw-normal">Check the Weather Forecast</h3>
-      
-                    <div class="input-group rounded">
-                        <input type="search" class="form-control rounded" placeholder="City" aria-label="Search"
-                        aria-describedby="search-addon">
-                        <button type="button" class="btn btn-primary">
-                            Check!
-                        </button>
-                    </div>
-      
-                    <div class="card shadow-sm">
-                        <div class="card-header">
-                            <h4 class="mb-1">New York, US</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-2">Current Temperature: <strong class="temperature">5.42°C</strong></p>
-                            <p> Feels like: <strong class="temperature">4.37°C</strong></p>
-                            <p>Max: <strong class="temperature">6.11°C</strong>, Min: <strong class="temperature">3.89°C</strong></p>
-      
-                            <div class="d-flex flex-row align-items-center weather-info">
-                                <p class="mb-0 me-4">Scattered Clouds</p>
-                                <i class="fas fa-cloud weather-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-      
-                </div>
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-8 col-lg-6 col-xl-4">
+            <h3 class="mb-4 pb-2 fw-normal">Check the Current Weather</h3>
+
+            <div class="input-group rounded">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="City"
+                aria-label="Search"
+                aria-describedby="search-addon"
+                id="searchInput"
+              />
+              <button type="button" onclick="APICALL()" class="btn btn-primary">
+                Check!
+              </button>
             </div>
-      
+
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h4 id="CITY_NAME" class="mb-1">City, Country</h4>
+              </div>
+              <div class="card-body">
+                <p class="mb-2">
+                  Current Temperature:
+                  <strong id="Temperature" class="temperature">00.0°C</strong>
+                </p>
+                <p>Feels like: <strong id="Feels_temp_C" class="temperature">00.0°C</strong></p>
+                <p>
+                  Max: <strong id="MAX_Temp" class="temperature">00.0°C</strong>, Min:
+                  <strong id="MIN_Temp" class="temperature">00.0°C</strong>
+                </p>
+
+                <div class="d-flex flex-row align-items-center weather-info">
+                  <p id="Cond_text" class="mb-0 me-4"></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
-</body>
+    <!-- <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+
+      async function APICALL() {
+        var inputElement = document.getElementById("searchInput");
+        var searchText = inputElement.value;
+        console.log("City NAME:", searchText);
+        const BASE_URL = "https://api.weatherapi.com/v1/forecast.json?key=";
+        const APIKEY = "09e23a81c17e423093b64454230607";
+
+        try {
+          const res = await axios.get(
+            `${BASE_URL}${APIKEY}&q=${searchText}&aqi=no`
+          );
+          console.log("res", res);
+          inputElement.value = "";
+          
+          let myCity = document.getElementById("CITY_NAME");
+          myCity.innerHTML = res.data.location.name + ", "  +res.data.location.country;
+
+          let my_temp = document.getElementById("Temperature");
+          my_temp.innerHTML = res.data.current.temp_c;
+          // Feels_temp_C
+
+          let Feels_temp_C = document.getElementById("Feels_temp_C");
+          Feels_temp_C.innerHTML = res.data.current.feelslike_c;
+          
+          let MAX_Temp = document.getElementById("MAX_Temp");
+          MAX_Temp.innerHTML = res.data.forecast.forecastday[0].day.maxtemp_c;
+
+          // Cond_text
+          let Cond_text = document.getElementById("Cond_text");
+          Cond_text.innerHTML = res.data.current.condition.text;
+    
+        } catch (err) {
+          console.log("error", err);
+          inputElement.value = "";
+        }
+      }
+      APICALL();
+    </script>
+  </body>
 </html>
