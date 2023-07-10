@@ -66,7 +66,7 @@
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-8 col-lg-6 col-xl-4">
-            <h3 class="mb-4 pb-2 fw-normal">Check the Current Weather</h3>
+            <h3 class="mb-3 pb-2 fw-normal">Check the Current Weather</h3>
 
             <div class="input-group rounded">
               <input
@@ -91,17 +91,37 @@
                   Current Temperature:
                   <strong id="Temperature" class="temperature">00.0°C</strong>
                 </p>
-                <p>Feels like: <strong id="Feels_temp_C" class="temperature">00.0°C</strong></p>
                 <p>
-                  Max: <strong id="MAX_Temp" class="temperature">00.0°C</strong>, Min:
+                  Feels like:
+                  <strong id="Feels_temp_C" class="temperature">00.0°C</strong>
+                </p>
+                <p>
+                  Max:
+                  <strong id="MAX_Temp" class="temperature">00.0°C</strong>,
+                  Min:
                   <strong id="MIN_Temp" class="temperature">00.0°C</strong>
                 </p>
 
                 <div class="d-flex flex-row align-items-center weather-info">
                   <p id="Cond_text" class="mb-0 me-4"></p>
+                  <img
+                    id="img"
+                    height="100"
+                    width="100"
+                    alt="image"
+                    style="display: none"
+                  />
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <p id="error_data" class="mt-1 text-danger" style="display:none;"></p>
+                </div>
+            </div>
+        </div>
           </div>
         </div>
       </div>
@@ -110,7 +130,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-
       async function APICALL() {
         var inputElement = document.getElementById("searchInput");
         var searchText = inputElement.value;
@@ -124,9 +143,10 @@
           );
           console.log("res", res);
           inputElement.value = "";
-          
+
           let myCity = document.getElementById("CITY_NAME");
-          myCity.innerHTML = res.data.location.name + ", "  +res.data.location.country;
+          myCity.innerHTML =
+            res.data.location.name + ", " + res.data.location.country;
 
           let my_temp = document.getElementById("Temperature");
           my_temp.innerHTML = res.data.current.temp_c;
@@ -134,20 +154,29 @@
 
           let Feels_temp_C = document.getElementById("Feels_temp_C");
           Feels_temp_C.innerHTML = res.data.current.feelslike_c;
-          
+
           let MAX_Temp = document.getElementById("MAX_Temp");
           MAX_Temp.innerHTML = res.data.forecast.forecastday[0].day.maxtemp_c;
 
           // Cond_text
           let Cond_text = document.getElementById("Cond_text");
           Cond_text.innerHTML = res.data.current.condition.text;
-    
+          // imgage check
+          let img = document.getElementById("img");
+          img.style.display = "block";
+          let imgageURL = "https:" + res.data.current.condition.icon;
+          img.src = imgageURL;
+          console.log(imgageURL);
         } catch (err) {
-          console.log("error", err);
+          console.log("Error:", err.message);
+          var errorData = document.getElementById("error_data");
+          errorData.style.display = "block";
+          errorData.innerHTML = err.message;
+
           inputElement.value = "";
         }
       }
-      APICALL();
+      // APICALL();
     </script>
   </body>
 </html>
