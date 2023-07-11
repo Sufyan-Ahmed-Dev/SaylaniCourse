@@ -133,7 +133,7 @@
       async function APICALL() {
         var inputElement = document.getElementById("searchInput");
         var searchText = inputElement.value;
-        console.log("City NAME:", searchText);
+        // console.log("City NAME:", searchText);
         const BASE_URL = "https://api.weatherapi.com/v1/forecast.json?key=";
         const APIKEY = "09e23a81c17e423093b64454230607";
 
@@ -141,7 +141,7 @@
           const res = await axios.get(
             `${BASE_URL}${APIKEY}&q=${searchText}&aqi=no`
           );
-          console.log("res", res);
+          // console.log("res", res);
           inputElement.value = "";
 
           let myCity = document.getElementById("CITY_NAME");
@@ -158,6 +158,10 @@
           let MAX_Temp = document.getElementById("MAX_Temp");
           MAX_Temp.innerHTML = res.data.forecast.forecastday[0].day.maxtemp_c;
 
+          // MIN_Temp
+          let MIN_Temp = document.getElementById("MIN_Temp");
+          MIN_Temp.innerHTML = res.data.forecast.forecastday[0].day.mintemp_c;
+
           // Cond_text
           let Cond_text = document.getElementById("Cond_text");
           Cond_text.innerHTML = res.data.current.condition.text;
@@ -167,9 +171,39 @@
           let imgageURL = "https:" + res.data.current.condition.icon;
           img.src = imgageURL;
           console.log(imgageURL);
+
+          let errorData = document.getElementById("error_data");
+          errorData.style.display = "none";
+
         } catch (err) {
+
+          let myCity = document.getElementById("CITY_NAME");
+          myCity.innerHTML = "City" + ", " + "Country";
+
+          let my_temp = document.getElementById("Temperature");
+          my_temp.innerHTML = "00.0°C";
+          // Feels_temp_C
+
+          let Feels_temp_C = document.getElementById("Feels_temp_C");
+          Feels_temp_C.innerHTML = "00.0°C";
+
+          let MAX_Temp = document.getElementById("MAX_Temp");
+          MAX_Temp.innerHTML = "00.0°C";
+
+           // MIN_Temp
+           let MIN_Temp = document.getElementById("MIN_Temp");
+          MIN_Temp.innerHTML = "00.0°C";
+
+
+          // Cond_text
+          let Cond_text = document.getElementById("Cond_text");
+          Cond_text.style.display = "none";
+
+          let img = document.getElementById("img");
+          img.style.display = "none";
+
           console.log("Error:", err.message);
-          var errorData = document.getElementById("error_data");
+          let errorData = document.getElementById("error_data");
           errorData.style.display = "block";
           errorData.innerHTML = err.message;
 
@@ -178,5 +212,30 @@
       }
       // APICALL();
     </script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyARCWwEyKQcPcRZ_g575InEAQWjeE4ntaU",
+    authDomain: "weather-app-29212.firebaseapp.com",
+    projectId: "weather-app-29212",
+    storageBucket: "weather-app-29212.appspot.com",
+    messagingSenderId: "369266709928",
+    appId: "1:369266709928:web:58a1fa7ee7ec76b9b0799d",
+    measurementId: "G-F3BD8ZMLSF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
   </body>
 </html>
